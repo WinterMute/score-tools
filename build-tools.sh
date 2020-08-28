@@ -14,7 +14,8 @@ export BINUTILS_VERSION=2.35
 export GCC_VERSION=4.9.4
 #export NEWLIB_VERSION=1.20.0
 
-mkdir -p $WORKING_DIR
+mkdir -p $WORKING_DIR || exit 1
+mkdir -p $SOURCE_DIR || exit 1
 cd "$WORKING_DIR"
 
 if [ ! -f $SOURCE_DIR/binutils-$BINUTILS_VERSION.tar.bz2 ]; then
