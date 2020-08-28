@@ -20,12 +20,12 @@ cd "$WORKING_DIR"
 
 if [ ! -f $SOURCE_DIR/binutils-$BINUTILS_VERSION.tar.bz2 ]; then
   echo "Downloading binutils $BINUTILS_VERSION..."
-  curl --progress-bar "https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.bz2" -o "$SOURCE_DIR/binutils-$BINUTILS_VERSION.tar.bz2"
+  curl --progress-bar "https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.bz2" -o "$SOURCE_DIR/binutils-$BINUTILS_VERSION.tar.bz2" || exit 1
 fi
 
 if [ ! -f $SOURCE_DIR/gcc-$GCC_VERSION.tar.bz2 ]; then
   echo "Downloading gcc $GCC_VERSION..."
-  curl --progress-bar "https://ftp.gnu.org/gnu/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2" -o "$SOURCE_DIR/gcc-$GCC_VERSION.tar.bz2"
+  curl --progress-bar "https://ftp.gnu.org/gnu/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2" -o "$SOURCE_DIR/gcc-$GCC_VERSION.tar.bz2" || exit 1
 fi
 
 #if [ ! -f "$SOURCE_DIR/newlib-$NEWLIB_VERSION.tar.gz" ]; then
