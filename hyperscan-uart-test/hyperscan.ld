@@ -42,7 +42,7 @@ SECTIONS
   __bss_end__ = .; __end__ = .;
   . = ALIGN(32 / 8);
 
-  __bss_size__ = ( __bss_end__ - __bss_start__ ) / 4;
+  __bss_wsize__ = ( __bss_end__ - __bss_start__ ) / 4;
 
   /* Stabs debugging sections.  */
   .stab          0 : { *(.stab) }

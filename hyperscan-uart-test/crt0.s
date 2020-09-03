@@ -1,6 +1,6 @@
 	.extern _gp
 
-	.section ".crt0","ax"
+	.section ".crt0", "ax"
 	.global _start
 _start:
 	.rept	65
@@ -12,22 +12,34 @@ _start:
 	.space  0xe04 - ( . - _start)
 
 _entry:
-	la	r28, _gp
+	# disable irq
+	ldi	r4, 0
+	mtcr	r4, cr0
+	nop!
+	nop!
+	nop!
+	nop!
+	nop
 
-	la      r6, __bss_start__
-	la      r7, __bss_end__
-	ldiu!   r8, 0
+	# setup gp
+	la	r28, _gp
+	# setup stack
+	la	r0, 0xa0fffffc
+
+#	ldi	r4, 0
+	la	r5, __bss_wsize__
+	mtsr	r5, sr0
+	la	r6, __bss_end__
 	b!	.clearbss
 
 .clearbss_loop:
-	sw!     r8, [r6]
-	addi    r6, 4
+	push!	r4, [r6]
 .clearbss:
-	cmp!    r6, r7
-	bne    .clearbss_loop
+	bcnz!	.clearbss_loop
 
-	jl	main
+	jl!	main
 
 	.global exit
 exit:
 	b exit
+
